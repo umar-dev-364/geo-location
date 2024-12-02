@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin: 10px 0;
+  width: 100%;
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  margin: 10px 0;
+  width: 100%;
+  font-size: 18px;
+  text-transform: uppercase;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+#total {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+    </style>
+</head>
+<body>
+    
+    <div class="main">
+
+    
+    <h1>Tip Counter</h1>
+    <label for="bill">Bill amount</label>
+    <input type="number" name="" id="bill" placeholder="bill amount">
+    <label for="tip">Tip percentage</label>
+    <input type="number" name="" id="tip" placeholder="tip percentage">
+    <button id="calc">Calculate</button>
+    <p id="result"></p>
+</div>
+    <script>
+      let bill = document.getElementById('bill')
+      let tip = document.getElementById('tip')
+      let btn = document.getElementById('calc')
+      let result = document.getElementById('result')
+      
+      function calculate(){
+      let  billValue = parseFloat(bill.value) || 0;
+      let tipValue = parseFloat(tip.value) || 0;
+
+      if (billValue < 0 || tipValue < 0) {
+              result.innerText = "Please enter positive values.";
+    return;
+     }
+      let total = billValue * (1 + tipValue / 100)
+      result.innerText = `Total: $${total.toFixed(2)}`
+      console.log(billValue);
+
+      }
+      btn.addEventListener('click',  calculate)
+    </script>
+</body>
+</html>

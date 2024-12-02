@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    <h1>Your Current Country</h1>
+    
+    <p id="country" style="font-size: larger;"></p>
+
+    <script>
+        let country = document.getElementById('country')
+        if(navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(async(position) => {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+                console.log(`Latitude: ${lat}, Longitude: ${lon}`);
+               
+                try {
+                     const response = await fetch(`https://geocode.maps.co/reverse?lat=${lat}&lon=${lon}&key=674e3e3846fa4807145895hbs775072`)
+                     const data = await response.json();
+                     console.log(data);
+                     country.innerText = data.address.country;
+                } catch (error) {
+                 console.error('GeoLocation error: ', error);
+                 
+                }
+            })
+        }else{
+            console.error('GeoLocation is not supported by this browser.')
+        }
+    </script>
+</body>
+</html>
